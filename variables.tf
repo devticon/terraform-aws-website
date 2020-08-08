@@ -3,6 +3,6 @@ variable "domain" {
 }
 
 variable "origin_bucket_name" {
-  type = string
+  type    = string
   default = ""
 }

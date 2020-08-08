@@ -4,7 +4,7 @@ locals {
 
 data "archive_file" "router" {
   type        = "zip"
-  source_file  = "${path.module}/router/index.js"
+  source_file = "${path.module}/router/index.js"
   output_path = "${path.module}/.tmp/router.zip"
 }
 
@@ -30,11 +30,11 @@ EOF
 resource "aws_lambda_function" "router" {
   provider = aws.virgina
 
-  filename      = data.archive_file.router.output_path
-  function_name = local.router_name
-  role          = aws_iam_role.router.arn
-  handler       = "index.handler"
+  filename         = data.archive_file.router.output_path
+  function_name    = local.router_name
+  role             = aws_iam_role.router.arn
+  handler          = "index.handler"
   source_code_hash = data.archive_file.router.output_base64sha256
-  runtime = "nodejs12.x"
-  publish = true
+  runtime          = "nodejs12.x"
+  publish          = true
 }

@@ -1,5 +1,5 @@
 locals {
-  domain_parts = split(".", var.domain)
+  domain_parts     = split(".", var.domain)
   hosted_zone_name = "${join(".", slice(local.domain_parts, length(local.domain_parts) - 2, length(local.domain_parts)))}."
 
 }
