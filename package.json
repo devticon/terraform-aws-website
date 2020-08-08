@@ -1,0 +1,8 @@
+{
+  "name": "terraform-aws-website",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "git@github.com:devticon/terraform-aws-website.git",
+  "author": "krs <k.kamasa@gmail.com\\>",
+  "license": "MIT"
+}
