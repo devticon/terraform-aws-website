@@ -7,7 +7,5 @@ module "cert" {
   domain_name = var.domain
   zone_id     = data.aws_route53_zone.main.id
 
-  subject_alternative_names = [
-    "*.${var.domain}",
-  ]
+  subject_alternative_names = local.dns_aliases
 }

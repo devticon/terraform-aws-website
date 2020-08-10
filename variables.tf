@@ -41,3 +41,13 @@ variable "on_404_code" {
   type    = number
   default = 404
 }
+
+variable "www_alias_enable" {
+  type    = bool
+  default = true
+}
+
+variable "dns_aliases" {
+  type    = list(string)
+  default = []
+}

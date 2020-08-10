@@ -13,10 +13,7 @@ resource "aws_cloudfront_distribution" "main" {
 
   default_root_object = "index.html"
 
-  aliases = [
-    var.domain,
-    "www.${var.domain}"
-  ]
+  aliases = concat([var.domain], local.dns_aliases)
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]

@@ -1,5 +1,7 @@
 resource "aws_route53_record" "main" {
-  name    = var.domain
+  for_each = toset(concat([var.domain], local.dns_aliases))
+
+  name    = each.value
   type    = "A"
   zone_id = data.aws_route53_zone.main.id
 
