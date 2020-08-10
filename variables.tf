@@ -51,3 +51,18 @@ variable "dns_aliases" {
   type    = list(string)
   default = []
 }
+
+variable "router_fix_cache_headers" {
+  type    = bool
+  default = true
+}
+
+variable "router_fix_security_headers" {
+  type    = bool
+  default = true
+}
+
+variable "router_server_index_html" {
+  type    = bool
+  default = true
+}
