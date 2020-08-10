@@ -5,15 +5,7 @@ locals {
 data "archive_file" "router" {
   type        = "zip"
   output_path = "${path.module}/.tmp/router.zip"
-
-  source {
-    content  = templatefile("${path.module}/router/index.js.tmpl", {
-      fixCacheHeaders: var.router_fix_cache_headers
-      fixSecurityHeaders: var.router_fix_security_headers
-      serverIndexHtml: var.router_server_index_html
-    })
-    filename = "index.js"
-  }
+  source_file = "${path.module}/router/index.js"
 }
 
 resource "aws_iam_role" "router" {
