@@ -1,5 +1,8 @@
 locals {
   s3_origin_id = "S3-Origin"
+  cache_min_ttl = var.cache_enable ? var.cache_min_ttl : 0
+  cache_max_ttl = var.cache_enable ? var.cache_max_ttl : 0
+  cache_default_ttl = var.cache_enable ? var.cache_default_ttl : 0
 }
 
 resource "aws_cloudfront_origin_access_identity" "main" {
@@ -20,10 +23,10 @@ resource "aws_cloudfront_distribution" "main" {
     cached_methods         = ["GET", "HEAD"]
     target_origin_id       = local.s3_origin_id
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
-    compress               = true
+    min_ttl                = local.cache_min_ttl
+    default_ttl            = local.cache_default_ttl
+    max_ttl                = local.cache_max_ttl
+    compress               = var.cache_compress
 
     forwarded_values {
       query_string = true
@@ -60,7 +63,7 @@ resource "aws_cloudfront_distribution" "main" {
 
   custom_error_response {
     error_code         = 403
-    response_code      = 200
-    response_page_path = "/404/index.html"
+    response_code      = var.on_404_code
+    response_page_path = var.on_404_path
   }
 }
