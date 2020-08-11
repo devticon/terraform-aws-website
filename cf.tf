@@ -32,9 +32,12 @@ resource "aws_cloudfront_distribution" "main" {
       }
     }
 
-    lambda_function_association {
-      event_type = "origin-request"
-      lambda_arn = aws_lambda_function.router.qualified_arn
+    dynamic lambda_function_association {
+      for_each = var.router_enable ? [1]: []
+      content {
+        event_type = "origin-request"
+        lambda_arn = aws_lambda_function.router[0].qualified_arn
+      }
     }
   }
 

@@ -32,6 +32,11 @@ variable "cache_enable" {
   default = true
 }
 
+variable "router_enable" {
+  type    = bool
+  default = true
+}
+
 variable "on_404_path" {
   type    = string
   default = "/404/index.html"
